@@ -2,3 +2,32 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
+    cache: false
+  datasource:
+    driver-class-name:  com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seckill?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    hikari:
+      pool-name: DateHikaricCP
+      #最小空闲连接数
+      minimum-idle: 5
+      # 空闲连接存活的最大时间：默认60000
+      idle-timeout: 180000
+      maximum-pool-size: 10
+      auto-commit: true
+      max-lifetime: 180000
+      connection-timeout: 30000
+      #测试连接是否可用的查询语句
+      connection-test-query: SELECT 1
+    #连接池
+mybatis-plus:
+  # 配置Mapper.xml映射文件
+  mapper-locations:   classpath*:/mapper/*Mapper.xml
+  # 配置Mybatis数据返回类型别名（默认别名是类名）
+  type-aliases-package: com.guang.seckill.pojo
+
+#MybatisSql打印(方法接口所在的包，不是mapper.xml所在的包)
+logging:
+  level:
+    com.guang.seckill.mapper: debug
